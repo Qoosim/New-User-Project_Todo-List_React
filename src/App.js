@@ -10,9 +10,26 @@ class App extends Component {
                 { action: 'Buy Milk', done: false },
                 { action: 'Dentist at 5pm', done: false },
                 { action: 'Go to Gym', done: false }
-            ]
+            ], 
+            newTodo: ''
         }
     }
+
+    updateValue = (event) => {
+        this.setState({
+            newTodo: event.target.value
+        })
+    }
+
+    newTodo = () => {
+        this.setState({
+            todoItems: [
+                ...this.state.todoItems,
+                { action: this.state.newTodo, done: false }
+            ]
+        })
+    }
+
 
     //changeStateData = () => {
      //   this.setState({
@@ -35,11 +52,16 @@ class App extends Component {
                         <h2 className="bg-primary text-white text-center p2">
                             {this.state.userName} Todo List
                         </h2>
-                        <button 
-                            className='btn btn-secondary m-2' 
-                            onClick={this.changeStateData}>
-                            Change
+                    <div className="col-12">
+                        <input 
+                            className="form-control" 
+                            value={this.state.newTodo} 
+                            onChange={this.updateValue}
+                        />
+                        <button className="btn btn-primary" onClick={this.newTodo}>
+                            Add
                         </button>
+                    </div>
                     </div>
                     <div className="col-12">
                         <table className="table">

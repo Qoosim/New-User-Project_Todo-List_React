@@ -4,8 +4,14 @@ class App extends Component {
     constructor() {
         super()
         this.state = {
-            userName: 'Name1'
+            userName: 'Qoosim'
         }
+    }
+
+    changeStateData = () => {
+        this.setState({
+            userName: this.state.userName === 'Qoosim' ? 'Ayinde' : 'Qoosim'
+        })
     }
 
     render() {
@@ -14,8 +20,11 @@ class App extends Component {
                 <div className="row">
                     <div className="col-12">
                         <h2 className="bg-primary text-white text-center p2">
-                            Todo List
+                            {this.state.userName} Todo List
                         </h2>
+                        <button className='btn btn-secondary m-2' onClick={this.changeStateData}>Change
+
+                        </button>
                     </div>
 
                 </div>

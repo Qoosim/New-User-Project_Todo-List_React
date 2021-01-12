@@ -41,6 +41,13 @@ class App extends Component {
         this.state.todoItems.map((item) => (
             <tr key={item.action}>
                 <td>{item.action}</td>
+                <td>
+                    <input 
+                        type="checkbox" 
+                        checked={item.done}
+                        onChange={() => this.toggleDone(item)}
+                    />
+                </td>
             </tr>
         ))
 
@@ -68,6 +75,7 @@ class App extends Component {
                             <thead>
                                 <tr>
                                     <th>Task</th>
+                                    <th>Complete</th>
                                 </tr>
                             </thead>
                             <tbody>{this.todoRows()}</tbody>

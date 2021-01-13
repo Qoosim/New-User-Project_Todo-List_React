@@ -1,4 +1,6 @@
 import React, { Component } from 'react'
+import Navbar from './components/Navbar'
+import TodoRows from './components/TodoRows'
 
 class App extends Component {
 
@@ -30,6 +32,13 @@ class App extends Component {
         })
     }
 
+    toggleDone = (todo) => {
+        this.setState({
+            todoItems: this.state.todoItems.map((item) => 
+                item.action === todo.action ? { ...item, done: !item.done } : item
+            )
+        })
+    }
 
     //changeStateData = () => {
      //   this.setState({
@@ -37,28 +46,19 @@ class App extends Component {
        // })
     //}
 
-    todoRows = () => 
-        this.state.todoItems.map((item) => (
-            <tr key={item.action}>
-                <td>{item.action}</td>
-                <td>
-                    <input 
-                        type="checkbox" 
-                        checked={item.done}
-                        onChange={() => this.toggleDone(item)}
-                    />
-                </td>
-            </tr>
-        ))
+    todoRows = () => this.state.todoItems.map((item) => ( 
+        <TodoRows 
+            key={item.action} 
+            item={item} 
+            callback={this.toggleDone} 
+        /> 
+    ))
 
     render() {
         return (
             <div className="container">
                 <div className="row">
-                    <div className="col-12">
-                        <h2 className="bg-primary text-white text-center p2">
-                            {this.state.userName} Todo List
-                        </h2>
+                    <Navbar name={this.state.userName} />
                     <div className="col-12">
                         <input 
                             className="form-control" 
@@ -68,7 +68,6 @@ class App extends Component {
                         <button className="btn btn-primary" onClick={this.newTodo}>
                             Add
                         </button>
-                    </div>
                     </div>
                     <div className="col-12">
                         <table className="table">
